@@ -1,0 +1,24 @@
+﻿@model TblUrun
+<div class="col-md-6">
+    <div class="card mb-4">
+        <h5 class="card-header">Ürün Formu</h5>
+        <div class="card-body">
+            <form asp-action="UrunForm" method="post">
+                <div class="mb-3 d-flex input-group-md">
+                    <div class="col-lg-4 me-2">
+                        <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Ürün Adı" aria-describedby="defaultFormControlHelp" asp-for="Urunadi" />
+                    </div>
+                    <div class="input-group w-auto me-2">
+                        <span class="input-group-text">₺</span>
+                        <input type="text" class="form-control" placeholder="Fiyat" asp-for="Fiyat" aria-label="Amount (to the nearest dollar)" />
+                        <span class="input-group-text">.00</span>
+                    </div>
+                    <button type="submit" class="btn text-white col-lg-2 btn-primary">Ekle</button>
+                </div>
+                 
+               
+              
+            </form>
+        </div>
+    </div>
+</div> 

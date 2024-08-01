@@ -1,0 +1,49 @@
+﻿@model List<TblHammadde>
+@{
+    List<TblBirim> birim = ViewBag.Birim;
+}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <h5 class="mb-0">Hammaddeler</h5>
+            <form class="ms-auto position-relative">
+               
+                <a href="/Urun/UrunBirim" class="btn btn-primary"  placeholder="search">Hammadde Birimi Ekle</a>
+            </form>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>HAMMADDE ADI</th>
+                        <th>FİYAT</th>
+                        <th>MİKTAR</th>
+                        <th>İŞLEMLER</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        var birimad = birim.FirstOrDefault(b => b.Id == item.BirimId);
+                        <tr>
+                            <td>@item.MaddeAd</td>
+                            <td>@item.Fiyat ₺</td>
+                            <td>@item.Adet @birimad.Ad</td>
+
+                     
+                            <td>
+                                <div class="table-actions d-flex align-items-center gap-3 fs-6">
+                                    <a href="/Urun/HammaddeForm/@item.Id" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="/Urun/HammaddeSil/@item.Id" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+         
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

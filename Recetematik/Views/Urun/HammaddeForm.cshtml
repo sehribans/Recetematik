@@ -1,0 +1,47 @@
+﻿@model TblHammadde
+@{
+    List<TblBirim> birim = ViewBag.Birim;
+}
+<div class="col-md-6">
+    <div class="card mb-4">
+        <h5 class="card-header">Hammadde Formu</h5>
+        <div class="card-body">
+            <form asp-action="HammaddeForm" method="post">
+                <div class="d-flex">
+                    <div class="col-lg-6 me-2 mb-2">
+
+                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" asp-for="BirimId">
+                            @foreach (var item in birim)
+                            {
+                                <option value="@item.Id">@item.Ad</option>
+                            }
+
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Hammadde Adı" aria-describedby="defaultFormControlHelp" asp-for="MaddeAd" />
+                    </div>
+                </div>
+              
+                <div class="d-flex">
+                    <div class="col-lg-6 me-2">
+                        <input class="form-control"  type="number" asp-for="Adet" placeholder="Miktar" />
+                    </div>
+                    <div class="mb-3 d-flex col-lg-6">
+
+                     
+                        <div class="input-group w-auto">
+                            <span class="input-group-text">₺</span>
+                            <input type="text" class="form-control" placeholder="Fiyat" asp-for="Fiyat" aria-label="Amount (to the nearest dollar)" />
+                            <span class="input-group-text">.00</span>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <button type="submit" class="btn text-white mb-2 col-lg-2 btn-primary">Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
+

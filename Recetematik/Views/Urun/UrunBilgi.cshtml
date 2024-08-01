@@ -1,0 +1,87 @@
+﻿@model TblUrunbilgi
+@{
+    List<TblUrunbilgi> urunbilgi = ViewBag.Urun;
+    List<TblHammadde> hammadde = ViewBag.Hammadde;
+    List<TblBirim> birim = ViewBag.Birim;
+    List<TblUrun> urun = ViewBag.UrunList;
+
+    var id = ViewBag.Id;
+
+}
+
+<div class="col-6">
+    <div class="d-flex justify-content-between mb-2 p-1">
+        @{
+            var urunad = urun.FirstOrDefault(m => m.Id == id) ?? new();
+        }
+        <h5 class="card-header fw-bold">Ürün:@urunad.Urunadi</h5>
+        <h5 class="card-header fw-bold">Üretilebilir Adet:@ViewBag.adet</h5>
+
+    </div>
+    <div class="card mb-4">
+        <h5 class="card-header">Ürün Hammadde Ekleme</h5>
+        <div class="card-body">
+            <form asp-action="UrunBilgiForm" method="post">
+                <input type="hidden" asp-for="UrunId" value="@id" />
+                <div class="mb-3 d-flex input-group-md">
+                    <select class="form-select me-2" id="exampleFormControlSelect1" aria-label="Default select example" asp-for="HammaddeId">
+                        @foreach (var item in hammadde )
+                        {
+                            <option value="@item.Id">@item.MaddeAd</option>
+                        }
+
+                    </select>
+                    <input class="form-control me-2" type="number" asp-for="Miktar" placeholder="Miktar" />
+                    <button type="submit" class="btn text-white col-lg-2 btn-primary">Ekle</button>
+                </div>
+
+              
+            </form>
+        </div>
+    </div>
+</div>
+<div class="card col-6">
+    <div class="d-flex justify-content-between">
+        <h5 class="card-header">Hammadde Birimleri</h5>
+   
+    </div>
+
+
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    
+                    <th>HAMMADDE AD</th>
+                    <th>MİKTAR</th>
+                    <th>İŞLEMLER</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+
+                @foreach (var item in urunbilgi)
+                {
+                    var maddead = hammadde.FirstOrDefault(z => z.Id == item.HammaddeId) ?? new();
+                    var birimad = birim.FirstOrDefault(b => b.Id == maddead.BirimId);
+                    <tr>
+                        
+                        <td>@maddead.MaddeAd</td>
+                        <td>@item.Miktar @birimad.Ad</td>
+                        <td>
+                            <div class="table-actions d-flex align-items-center gap-3 fs-6">
+
+                                <a href="/Urun/UrunBilgiSil/@item.Id" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
