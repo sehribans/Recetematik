@@ -8,7 +8,14 @@ namespace Recetematik.Models
         public int Id { get; set; }
         public string? Urunadi { get; set; }
         public decimal? Fiyat { get; set; }
+    }
 
+    public class urunModel
+    {
+        public int Id { get; set; }
+        public string? Urunadi { get; set; }
+        public decimal? Fiyat { get; set; }
+        public int? Adet { get; set; }
 
     }
 }

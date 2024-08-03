@@ -15,8 +15,39 @@ namespace Recetematik.Controllers
 
         public IActionResult Index()
         {
-            var urunler = _c.TblUruns.ToList();
-            ViewBag.Sayi = TempData["Sayi"];  
+            var urunlerTemp = _c.TblUruns.ToList();
+
+            var urunler = urunlerTemp.Select(x => new urunModel { 
+                Id = x.Id,
+                Fiyat = x.Fiyat,
+                Urunadi = x.Urunadi,
+                Adet = 0,
+            }).ToList();
+
+           foreach(var item in urunler)
+            {
+                var hammadeler = _c.TblUrunbilgis.Where(m=>m.UrunId == item.Id).ToList();
+                int urunAdedi = 0;
+                var referansUrun = _c.TblUrunbilgis.FirstOrDefault(m=>m.UrunId==item.Id) ?? new();
+                var referansHammade = _c.TblHammaddes.FirstOrDefault(x => x.Id == referansUrun.Id) ?? new();
+                urunAdedi = (referansHammade.Adet / referansUrun.Miktar) ?? 0;
+
+           foreach(var it in hammadeler)
+                {
+                    var hammade = _c.TblHammaddes.FirstOrDefault(x => x.Id == it.Id) ?? new();
+
+                    var tempAdet = hammade.Adet / it.Miktar;
+
+                    if(tempAdet < urunAdedi)
+                    {
+                        urunAdedi = tempAdet ?? 0;
+                    }
+                }    
+
+           item.Adet = urunAdedi;
+
+            } 
+           
 
             return View(urunler);
         }
@@ -176,7 +207,7 @@ namespace Recetematik.Controllers
             
             }
             ViewBag.adet = UretilebilirAdet;
-              TempData["Sayi"] = UretilebilirAdet;
+            TempData["Sayi"] = UretilebilirAdet;
 
             ViewBag.Hammadde = hammadde;
             ViewBag.Urun = urun;
