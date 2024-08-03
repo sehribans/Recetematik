@@ -1,0 +1,30 @@
+﻿@model TblCari
+<div class="col-md-6">
+    <div class="card mb-4">
+        <h5 class="card-header">Cari Ekleme Formu</h5>
+        <div class="card-body">
+            <form asp-action="CariForm" method="post">
+                <div class="d-flex mb-2">
+                    <div class="col-lg-6 me-2">
+                        <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Cari Unvan" aria-describedby="defaultFormControlHelp" asp-for="Unvan" />
+                    </div>
+                    <div class="col-lg-6 me-2">
+                        <input class="form-control" type="tel" asp-for="Telefon" placeholder="Telefon" />
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                  
+                    <div class="mb-3 col-lg-6 me-2">
+                        <input class="form-control" type="email" asp-for="Eposta" placeholder="E-Mail" />
+                    </div>
+                    <div class="col-lg-6">
+                        <textarea type="text" class="form-control" id="defaultFormControlInput" placeholder="Cari Adres" aria-describedby="defaultFormControlHelp" asp-for="Adres"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn text-white mb-2 col-lg-2 btn-primary">Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
