@@ -1,4 +1,4 @@
-﻿@model List<TblUrun>
+﻿@model List<urunModel>
 @{
   
 }
@@ -42,7 +42,7 @@
                         <tr>
                             <td>@item.Urunadi</td>
                             <td>@item.Fiyat ₺</td>
-                            <td>@ViewBag.Sayi</td>
+                            <td>@item.Adet</td>
                             <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">
                                     <a href="/Urun/UrunBilgi/@item.Id" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-list"></i></a>
