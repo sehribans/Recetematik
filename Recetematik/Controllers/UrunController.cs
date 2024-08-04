@@ -29,7 +29,7 @@ namespace Recetematik.Controllers
                 var hammadeler = _c.TblUrunbilgis.Where(m=>m.UrunId == item.Id).ToList();
                 int urunAdedi = 0;
                 var referansUrun = _c.TblUrunbilgis.FirstOrDefault(m=>m.UrunId==item.Id) ?? new();
-                var referansHammade = _c.TblHammaddes.FirstOrDefault(x => x.Id == referansUrun.Id) ?? new();
+                var referansHammade = _c.TblHammaddes.FirstOrDefault(x => x.Id == referansUrun.HammaddeId) ?? new();
                 urunAdedi = (referansHammade.Adet / referansUrun.Miktar) ?? 0;
 
            foreach(var it in hammadeler)
