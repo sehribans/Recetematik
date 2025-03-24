@@ -473,13 +473,13 @@ a {
     margin-left: 10px;
     margin-bottom: 0;
     letter-spacing: 1px;
-    color: #3461ff;
+    color: #009444;
 }
 
 .toggle-icon {
     font-size: 26px;
     cursor: pointer;
-    color: #3461ff;
+    color: #009444;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -593,10 +593,10 @@ a {
 .sidebar-wrapper .metismenu a:active,
 .sidebar-wrapper .metismenu a:focus,
 .sidebar-wrapper .metismenu a:hover {
-	color: #3461ff;
+	color: #009444;
 	text-decoration: none;
 	background-color: rgb(255 255 255);
-    border-left: 4px solid #3461ff;
+    border-left: 4px solid #009444;
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
 }
 
@@ -648,7 +648,7 @@ a {
 	}
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu a {
 		justify-content: center;
-		border-left: 0px solid #3461ff;
+		border-left: 0px solid #009444;
 	}
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu .menu-title {
 		display: none
@@ -756,7 +756,7 @@ a {
 
 .fm-menu .list-group a:hover {
 	background-color: rgb(52 97 255 / 15%);
-	color: #3461ff;
+	color: #009444;
 	transition: all .2s ease-out
 }
 
@@ -793,7 +793,7 @@ a {
 	border-radius: 50%;
 	bottom: 20px;
 	right: 12px;
-	background-color: #0d6efd;
+	background-color: #009444;
 	z-index: 5
 }
 
@@ -1288,7 +1288,7 @@ a {
 }
 
 .email-navigation a.list-group-item.active {
-	color: #0b5ed7;
+	color: #8cc342;
 	font-weight: 600;
 	background-color: rgb(13 110 253 / .12)
 }

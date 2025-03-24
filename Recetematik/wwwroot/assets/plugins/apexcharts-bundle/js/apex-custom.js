@@ -312,7 +312,7 @@ $(function () {
 				endingShape: 'rounded'
 			}
 		},
-		colors: ["#0d6efd", "#212529"],
+		colors: ["#009444", "#212529"],
 		title: {
 			text: 'Traffic Sources'
 		},
@@ -366,7 +366,7 @@ $(function () {
 				show: true
 			},
 		},
-		colors: ["#0d6efd", "#17a00e", "#f41127"],
+		colors: ["#009444", "#17a00e", "#f41127"],
 		stroke: {
 			width: [0, 2, 5],
 			curve: 'smooth'
@@ -425,7 +425,7 @@ $(function () {
 			height: 330,
 			type: 'pie',
 		},
-		colors: ["#0d6efd", "#6c757d", "#17a00e", "#f41127", "#ffc107"],
+		colors: ["#009444", "#6c757d", "#17a00e", "#f41127", "#ffc107"],
 		labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
 		responsive: [{
 			breakpoint: 480,
@@ -451,7 +451,7 @@ $(function () {
 			height: 380,
 			type: 'donut',
 		},
-		colors: ["#0d6efd", "#212529", "#17a00e", "#f41127", "#ffc107"],
+		colors: ["#009444", "#212529", "#17a00e", "#f41127", "#ffc107"],
 		responsive: [{
 			breakpoint: 480,
 			options: {
@@ -491,7 +491,7 @@ $(function () {
 				top: 1
 			}
 		},
-		colors: ["#0d6efd", "#212529", "#17a00e"],
+		colors: ["#009444", "#212529", "#17a00e"],
 		title: {
 			text: 'Radar Chart - Multi Series'
 		},
@@ -540,7 +540,7 @@ $(function () {
 		title: {
 			text: 'Radar with Polygon Fill'
 		},
-		colors: ["#0d6efd"],
+		colors: ["#009444"],
 		markers: {
 			size: 4,
 			colors: ['#fff'],
@@ -628,7 +628,7 @@ $(function () {
             }
           }
         },
-		colors: ["#0d6efd", "#17a00e", "#f41127", "#ffc107"],
+		colors: ["#009444", "#17a00e", "#f41127", "#ffc107"],
         labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
         };
 

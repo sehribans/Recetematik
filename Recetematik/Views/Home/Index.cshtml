@@ -1,8 +1,144 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
+    var TSatis = ViewBag.ToplamSatis;
+    var fark = ViewBag.Fark;
+    List<TblUrun> urunliste = ViewBag.Uruns;
+    List<TblUrun> DepoUrun = ViewBag.Depodaki;
+    List<TblSatis> Satis = ViewBag.SatisListe;
+    var grafikListe = DepoUrun.Where(x => !urunliste.Select(z => z.Id).Contains(x.Id)).ToList();
+    var grafikLabels = grafikListe.Select(c => c.Urunadi).ToArray();
+    var toplamadet = Satis.Where(x => grafikListe.Select(m => m.Id).Contains(x.UrunId ?? 0));
+    var toplam = toplamadet.Sum(x => x.Miktar);
+    var DilimListe = new List<int>();
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    foreach (var sayi in toplamadet)
+    {   var dilim = (sayi.Maliyet * 100) / toplam;
+        DilimListe.Add((int)dilim);
+       
+    }
+    var dilimArray = DilimListe.ToArray();
+
+}
+<div class="row">
+    <div class="row col-6">
+
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-success border-3">
+
+                <div class="card-body">
+                    <div class="d-flex align-items-stretch justify-content-between overflow-hidden">
+                        <div class="w-50">
+                            <p>Aylık Satış</p>
+                            <h4 class="">@TSatis ₺</h4>
+                        </div>
+                        <div class="w-50" style="position: relative;">
+                            <p class="mb-3 float-end  @(fark>0 ? "text-success" : "text-danger")  me-1"><i class="bi @(fark > 0 ? "bi-arrow-up" : "bi-arrow-down")"></i> % @fark</p>
+                            <div id="chart2" style="min-height: 40px;"><div id="apexchartsuhu2jayq" class="apexcharts-canvas apexchartsuhu2jayq apexcharts-theme-light" style="width: 129px; height: 40px;"><svg id="SvgjsSvg1043" width="129" height="40" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1045" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1044"><linearGradient id="SvgjsLinearGradient1049" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1050" stop-opacity="0.4" stop-color="rgba(216,227,240,0.4)" offset="0"></stop><stop id="SvgjsStop1051" stop-opacity="0.5" stop-color="rgba(190,209,230,0.5)" offset="1"></stop><stop id="SvgjsStop1052" stop-opacity="0.5" stop-color="rgba(190,209,230,0.5)" offset="1"></stop></linearGradient><clipPath id="gridRectMaskuhu2jayq"><rect id="SvgjsRect1054" width="135.5" height="42.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMaskuhu2jayq"><rect id="SvgjsRect1055" width="133" height="44" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath></defs><rect id="SvgjsRect1053" width="6.45" height="40" x="63.32976597377232" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke-dasharray="3" fill="url(#SvgjsLinearGradient1049)" class="apexcharts-xcrosshairs" y2="40" filter="none" fill-opacity="0.9" x1="63.32976597377232" x2="63.32976597377232"></rect><g id="SvgjsG1067" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1068" class="apexcharts-xaxis-texts-g" transform="translate(0, 2.75)"></g></g><g id="SvgjsG1070" class="apexcharts-grid"><g id="SvgjsG1071" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1073" x1="0" y1="0" x2="129" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1074" x1="0" y1="10" x2="129" y2="10" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1075" x1="0" y1="20" x2="129" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1076" x1="0" y1="30" x2="129" y2="30" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1077" x1="0" y1="40" x2="129" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1072" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1079" x1="0" y1="40" x2="129" y2="40" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1078" x1="0" y1="1" x2="0" y2="40" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1057" class="apexcharts-bar-series apexcharts-plot-series"><g id="SvgjsG1058" class="apexcharts-series" rel="1" seriesName="TotalxViews" data:realIndex="0"><path id="SvgjsPath1060" d="M5.989285714285714 40L5.989285714285714 20.3625C7.30595238095238 19.879166666666666 8.622619047619047 19.879166666666666 9.939285714285713 20.3625L9.939285714285713 20.3625L9.939285714285713 40L9.939285714285713 40C9.939285714285713 40 5.989285714285714 40 5.989285714285714 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 5.989285714285714 40L 5.989285714285714 20.3625Q 7.9642857142857135 19.6375 9.939285714285713 20.3625L 9.939285714285713 20.3625L 9.939285714285713 40L 9.939285714285713 40z" pathFrom="M 5.989285714285714 40L 5.989285714285714 40L 9.939285714285713 40L 9.939285714285713 40L 9.939285714285713 40L 5.989285714285714 40" cy="20" cx="23.16785714285714" j="0" val="400" barHeight="20" barWidth="6.45"></path><path id="SvgjsPath1061" d="M24.41785714285714 40L24.41785714285714 12.6125C25.734523809523807 12.129166666666666 27.051190476190477 12.129166666666666 28.36785714285714 12.6125L28.36785714285714 12.6125L28.36785714285714 40L28.36785714285714 40C28.36785714285714 40 24.41785714285714 40 24.41785714285714 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 24.41785714285714 40L 24.41785714285714 12.6125Q 26.392857142857142 11.887500000000001 28.36785714285714 12.6125L 28.36785714285714 12.6125L 28.36785714285714 40L 28.36785714285714 40z" pathFrom="M 24.41785714285714 40L 24.41785714285714 40L 28.36785714285714 40L 28.36785714285714 40L 28.36785714285714 40L 24.41785714285714 40" cy="12.25" cx="41.59642857142857" j="1" val="555" barHeight="27.75" barWidth="6.45"></path><path id="SvgjsPath1062" d="M42.84642857142857 40L42.84642857142857 27.5125C44.16309523809524 27.02916666666666 45.4797619047619 27.02916666666666 46.79642857142857 27.5125L46.79642857142857 27.5125L46.79642857142857 40L46.79642857142857 40C46.79642857142857 40 42.84642857142857 40 42.84642857142857 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 42.84642857142857 40L 42.84642857142857 27.5125Q 44.82142857142857 26.787499999999998 46.79642857142857 27.5125L 46.79642857142857 27.5125L 46.79642857142857 40L 46.79642857142857 40z" pathFrom="M 42.84642857142857 40L 42.84642857142857 40L 46.79642857142857 40L 46.79642857142857 40L 46.79642857142857 40L 42.84642857142857 40" cy="27.15" cx="60.02499999999999" j="2" val="257" barHeight="12.85" barWidth="6.45"></path><path id="SvgjsPath1063" d="M61.27499999999999 40L61.27499999999999 8.3625C62.59166666666666 7.87916666666667 63.90833333333333 7.87916666666667 65.225 8.3625L65.225 8.3625L65.225 40L65.225 40C65.225 40 61.27499999999999 40 61.27499999999999 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 61.27499999999999 40L 61.27499999999999 8.3625Q 63.24999999999999 7.637500000000001 65.225 8.3625L 65.225 8.3625L 65.225 40L 65.225 40z" pathFrom="M 61.27499999999999 40L 61.27499999999999 40L 65.225 40L 65.225 40L 65.225 40L 61.27499999999999 40" cy="8" cx="78.45357142857142" j="3" val="640" barHeight="32" barWidth="6.45"></path><path id="SvgjsPath1064" d="M79.70357142857142 40L79.70357142857142 17.3625C81.02023809523808 16.879166666666666 82.33690476190475 16.879166666666666 83.65357142857142 17.3625L83.65357142857142 17.3625L83.65357142857142 40L83.65357142857142 40C83.65357142857142 40 79.70357142857142 40 79.70357142857142 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 79.70357142857142 40L 79.70357142857142 17.3625Q 81.67857142857142 16.6375 83.65357142857142 17.3625L 83.65357142857142 17.3625L 83.65357142857142 40L 83.65357142857142 40z" pathFrom="M 79.70357142857142 40L 79.70357142857142 40L 83.65357142857142 40L 83.65357142857142 40L 83.65357142857142 40L 79.70357142857142 40" cy="17" cx="96.88214285714285" j="4" val="460" barHeight="23" barWidth="6.45"></path><path id="SvgjsPath1065" d="M98.13214285714285 40L98.13214285714285 6.8125C99.4488095238095 6.329166666666666 100.76547619047618 6.329166666666666 102.08214285714286 6.8125L102.08214285714286 6.8125L102.08214285714286 40L102.08214285714286 40C102.08214285714286 40 98.13214285714285 40 98.13214285714285 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 98.13214285714285 40L 98.13214285714285 6.812500000000003Q 100.10714285714285 6.087500000000002 102.08214285714286 6.812500000000003L 102.08214285714286 6.812500000000003L 102.08214285714286 40L 102.08214285714286 40z" pathFrom="M 98.13214285714285 40L 98.13214285714285 40L 102.08214285714286 40L 102.08214285714286 40L 102.08214285714286 40L 98.13214285714285 40" cy="6.450000000000003" cx="115.31071428571428" j="5" val="671" barHeight="33.55" barWidth="6.45"></path><path id="SvgjsPath1066" d="M116.56071428571428 40L116.56071428571428 22.8625C117.87738095238095 22.379166666666666 119.19404761904761 22.379166666666666 120.51071428571429 22.8625L120.51071428571429 22.8625L120.51071428571429 40L120.51071428571429 40C120.51071428571429 40 116.56071428571428 40 116.56071428571428 40 " fill="rgba(52,97,255,1)" fill-opacity="1" stroke="#3461ff" stroke-opacity="1" stroke-linecap="square" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-bar-area" index="0" clip-path="url(#gridRectMaskuhu2jayq)" pathTo="M 116.56071428571428 40L 116.56071428571428 22.8625Q 118.53571428571428 22.1375 120.51071428571429 22.8625L 120.51071428571429 22.8625L 120.51071428571429 40L 120.51071428571429 40z" pathFrom="M 116.56071428571428 40L 116.56071428571428 40L 120.51071428571429 40L 120.51071428571429 40L 120.51071428571429 40L 116.56071428571428 40" cy="22.5" cx="133.7392857142857" j="6" val="350" barHeight="17.5" barWidth="6.45"></path></g><g id="SvgjsG1059" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1080" x1="0" y1="0" x2="129" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1081" x1="0" y1="0" x2="129" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1082" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1083" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1084" class="apexcharts-point-annotations"></g></g><g id="SvgjsG1069" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1046" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend"></div><div class="apexcharts-tooltip apexcharts-theme-dark" style="left: 66.5548px; top: 7px;"><div class="apexcharts-tooltip-series-group apexcharts-active" style="display: flex;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(52, 97, 255); display: none;"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value">640</span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-dark"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                            <div class="resize-triggers"><div class="expand-trigger"><div style="width: 130px; height: 75px;"></div></div><div class="contract-trigger"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-orange border-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="w-100">
+                            <p class="mb-1">Üretilemeyen Ürünler</p>
+
+                            <table class="table mb-0 table-hover">
+                                <thead>
+                                <th scope="col" class="mb-0 text-orange">ID</th>
+                                <th scope="col" class="mb-0 text-orange">ÜRÜN</th>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in urunliste)
+                                    {
+                                        <tr scope="row">
+
+                                            <td>@item.Id</td>
+                                            <td>@item.Urunadi</td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col d-flex">
+        <div class="card rounded-4 overflow-hidden w-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <h6 class="mb-0">Depodaki Ürünler</h6>
+                    <div class="fs-5 ms-auto dropdown">
+                        
+                    </div>
+                </div>
+                <div class="by-device-container p-3">
+                    <canvas id="grafik"></canvas>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                
+                @foreach (var item in grafikListe)
+                {
+                    <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-top">
+                                <i class="bi bi-tablet-landscape-fill me-2 text-orange"></i> <span>@item.Urunadi - </span> <span></span>
+                    </li>
+                      
+                  
+                }
+               
+            </ul>
+        </div>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var grafikLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(grafikLabels));
+        var grafikValues = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(dilimArray));
+
+        console.log("Labels:", grafikLabels);
+        console.log("Values:", grafikValues);
+
+        var chart = new Chart(document.getElementById("grafik"), {
+            type: 'doughnut',
+            data: {
+                labels: grafikLabels,
+                datasets: [{
+                    label: "Device Users",
+                    backgroundColor: ["#12bf24", "#3461ff", "#ff6632"],
+                    data: grafikValues
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutoutPercentage: 77,
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        boxWidth: 8
+                    }
+                },
+                tooltips: {
+                    displayColors: false,
+                }
+            }
+        });
+    });
+
+
+</script>
+
+

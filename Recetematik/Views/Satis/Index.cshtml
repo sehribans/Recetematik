@@ -1,0 +1,85 @@
+﻿@using Recetematik.Models.Vm;
+@model SatisVm;
+<div class="col-10">
+    <div class="d-flex justify-content-between mb-2 p-1">
+    </div>
+    <div class="card mb-4">
+        <h5 class="card-header">Ürün Hammadde Ekleme</h5>
+        <div class="card-body">
+            <form asp-action="SatisForm" method="post">
+                <div class="mb-3 d-flex input-group-md">
+                    <select class="form-select me-2" id="exampleFormControlSelect1" aria-label="Default select example" asp-for="Satis.UrunId">
+                        @foreach (var item in Model.UrunListe)
+                        {
+                            <option value="@item.Id">@item.Urunadi</option>
+                        }
+
+                    </select>
+                    <select class="form-select me-2" id="exampleFormControlSelect1" aria-label="Default select example" asp-for="Satis.CariId">
+                        @foreach (var item in Model.CariListe)
+                        {
+                            <option value="@item.Id">@item.Unvan</option>
+                        }
+
+                    </select>
+                    <input class="form-control me-2" type="number" asp-for="Satis.Miktar" placeholder="Miktar" />
+                    <button type="submit" class="btn text-white col-lg-2 btn-primary">Ekle</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="card col-10">
+    <div class="d-flex justify-content-between">
+        <h5 class="card-header">Hammadde Birimleri</h5>
+
+    </div>
+
+
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <th>CARİ AD</th>
+                    <th>ÜRÜN AD</th>
+                    <th>MİKTAR</th>
+                    <th>MALİYET</th>
+                    <th>FİYAT</th>
+                    <th>TARİH</th>
+                    <th>İŞLEMLER</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+
+                @foreach (var item in Model.SatisListe)
+                {
+                    var cari = Model.CariListe.FirstOrDefault(m => m.Id == item.CariId).Unvan;
+                    var urun = Model.UrunListe.FirstOrDefault(u => u.Id == item.UrunId).Urunadi;
+                    <tr>
+
+                        <td>@cari</td>
+                        <td>@urun</td>
+                        <td>@item.Miktar</td>
+                        <td>@item.Maliyet</td>
+                        <td>@item.Fiyat</td>
+                        <td>@string.Format("{0:D}", item.Tarih)</td>
+                        <td>
+                            <div class="table-actions d-flex align-items-center gap-3 fs-6">
+
+                                <a href="/Satis/SatisSil/@item.Id" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>

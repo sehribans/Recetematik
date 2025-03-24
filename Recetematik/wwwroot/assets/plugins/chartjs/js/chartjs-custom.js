@@ -122,7 +122,7 @@ $(function () {
 			labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
 			datasets: [{
 				label: "Population (millions)",
-				backgroundColor: ["#0d6efd", "#212529", "#17a00e", "#f41127", "#ffc107"],
+				backgroundColor: ["#009444", "#212529", "#17a00e", "#f41127", "#ffc107"],
 				data: [2478, 5267, 734, 784, 433]
 			}]
 		},
@@ -143,7 +143,7 @@ $(function () {
 				label: "1950",
 				fill: true,
 				backgroundColor: "rgb(13 110 253 / 23%)",
-				borderColor: "#0d6efd",
+				borderColor: "#009444",
 				pointBorderColor: "#fff",
 				pointBackgroundColor: "rgba(179,181,198,1)",
 				data: [8.77, 55.61, 21.69, 6.62, 6.82]
@@ -173,7 +173,7 @@ $(function () {
 			labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
 			datasets: [{
 				label: "Population (millions)",
-				backgroundColor: ["#0d6efd", "#212529", "#17a00e", "#f41127", "#ffc107"],
+				backgroundColor: ["#009444", "#212529", "#17a00e", "#f41127", "#ffc107"],
 				data: [2478, 5267, 734, 784, 433]
 			}]
 		},
@@ -192,7 +192,7 @@ $(function () {
 			labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
 			datasets: [{
 				label: "Population (millions)",
-				backgroundColor: ["#0d6efd", "#212529", "#17a00e", "#f41127", "#ffc107"],
+				backgroundColor: ["#009444", "#212529", "#17a00e", "#f41127", "#ffc107"],
 				data: [2478, 5267, 734, 784, 433]
 			}]
 		},
@@ -211,7 +211,7 @@ $(function () {
 			labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
 			datasets: [{
 				label: "Population (millions)",
-				backgroundColor: ["#0d6efd", "#212529", "#17a00e", "#f41127", "#ffc107"],
+				backgroundColor: ["#009444", "#212529", "#17a00e", "#f41127", "#ffc107"],
 				data: [2478, 5267, 734, 784, 433]
 			}]
 		},
@@ -233,7 +233,7 @@ $(function () {
 			labels: ["1900", "1950", "1999", "2050"],
 			datasets: [{
 				label: "Africa",
-				backgroundColor: "#0d6efd",
+				backgroundColor: "#009444",
 				data: [133, 221, 783, 2478]
 			}, {
 				label: "Europe",

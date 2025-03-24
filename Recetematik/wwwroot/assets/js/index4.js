@@ -451,32 +451,34 @@ var options = {
 
 
 
-// chart 6
-new Chart(document.getElementById("chart6"), {
-	type: 'doughnut',
-	data: {
-		labels: ["Mobile", "Desktop", "Tablet"],
-		datasets: [{
-			label: "Device Users",
-			backgroundColor: ["#12bf24", "#3461ff", "#ff6632"],
-			data: [2478, 5267, 1834]
-		}]
-	},
-	options: {
-		maintainAspectRatio: false,
-		cutoutPercentage: 77,
-		legend: {
-		  position: 'bottom',
-		  display: false,
-		  labels: {
-			boxWidth:8
-		  }
-		},
-		tooltips: {
-		  displayColors:false,
-		}
-	}
-});
+	
+		//var labels = @Html.Raw(labelsJson);
+
+		//new Chart(document.getElementById("chart6"), {
+		//	type: 'doughnut',
+		//data: {
+		//	labels: labels,
+		//datasets: [{
+		//	label: "Device Users",
+		//backgroundColor: ["#12bf24", "#3461ff", "#ff6632"],
+		//data: [2478, 5267, 1834]
+  //          }]
+  //      },
+		//options: {
+		//	maintainAspectRatio: false,
+		//cutoutPercentage: 77,
+		//legend: {
+		//	position: 'bottom',
+		//display: false,
+		//labels: {
+		//	boxWidth: 8
+  //              }
+  //          },
+		//tooltips: {
+		//	displayColors: false,
+  //          }
+  //      }
+  //  });
 
 
 

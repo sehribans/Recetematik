@@ -1,7 +1,7 @@
 
 
 html.light-theme .top-header .navbar .top-navbar-right .nav-link:hover {
-	color: #0d6efd;
+	color: #009444;
 	background-color:#eff5ff
 }
 
@@ -9,12 +9,12 @@ html.light-theme .top-header .navbar .user-setting {
 	background-color: #ffffff;
 }
 html.light-theme .mobile-toggle-icon:hover {
-	color: #0d6efd;
+	color: #009444;
 	background-color:#eff5ff
 }
 
 html.light-theme .toggle-icon:hover {
-	color: #0d6efd;
+	color: #009444;
 	background-color:#eff5ff
 }
 

@@ -6,13 +6,13 @@
     <div class="card mb-4">
         <h5 class="card-header">Ürün Birim Cinsi</h5>
         <div class="card-body">
-            <form asp-action="BirimForm" method="post">
+            <form id="birimForm" method="post" asp-action="BirimForm" onsubmit="return false">
                 <div class="mb-3 d-flex">
                     <div class="col-lg-5 me-1">
                         <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Birim Adı" aria-describedby="defaultFormControlHelp" asp-for="Ad" />
                     </div>
-                    
-                    <button type="submit" class="btn text-white mb-2 col-lg-2 btn-primary">Ekle</button>
+
+                    <button onclick="BirimGonder()" type="submit" class="btn text-white mb-2 col-lg-2 btn-primary">Ekle</button>
                 </div>
 
             </form>
@@ -35,24 +35,9 @@
                     <th>İŞLEMLER</th>
                 </tr>
             </thead>
-            <tbody class="table-border-bottom-0">
+            <tbody class="table-border-bottom-0" id="BirimTablo">
 
-                @foreach (var item in birim)
-                {
-                    <tr>
-                        
-                        <td>@item.Id</td>
-                        <td>@item.Ad</td>
-                        <td>
-                            <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                               
-                                <a href="/Urun/BirimSil/@item.Id" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                            </div>
-                        </td>
-                       
-                    </tr>
-                }
-
+             
 
 
 
@@ -60,3 +45,49 @@
         </table>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    $(document).ready(function () { BirimTablo() })
+    function BirimTablo() {
+        $.ajax({
+            url: "/Urun/BirimListele",
+            method: "GET",
+            success: function (r) {
+                var icerik = "";
+                $.each(r, (k, v) => {
+                    icerik += `<tr>
+                               <td>${v.id}</td>
+                               <td>${v.ad}</td>
+                               <td><button onclick="birimSil(${v.id})" class="btn btn-sm text-danger">  <i  class="bi bi-trash-fill"></i></button></td>
+                            </tr>`
+                })
+                  $("#BirimTablo").html(icerik)
+            }       
+
+        })
+    }
+                  
+   
+    function BirimGonder() {
+        $.ajax({
+            url: "/Urun/BirimForm",
+            method: "POST", 
+            data: $("#birimForm").serialize(),
+            success: function (response) {
+                BirimTablo();
+            },
+        })
+
+    }
+    function birimSil(id) {
+        $.ajax({
+            url:"/Urun/BirimSil/"+id,
+            method:"GET",
+            success: function (r) {
+                BirimTablo();
+            }
+        })
+    }
+    
+</script>

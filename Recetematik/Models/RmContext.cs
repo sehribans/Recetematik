@@ -19,6 +19,7 @@ namespace Recetematik.Models
         public virtual DbSet<TblBirim> TblBirims { get; set; } = null!;
         public virtual DbSet<TblCari> TblCaris { get; set; } = null!;
         public virtual DbSet<TblHammadde> TblHammaddes { get; set; } = null!;
+        public virtual DbSet<TblSatis> TblSatis { get; set; } = null!;
         public virtual DbSet<TblUrun> TblUruns { get; set; } = null!;
         public virtual DbSet<TblUrunbilgi> TblUrunbilgis { get; set; } = null!;
 
@@ -98,6 +99,29 @@ namespace Recetematik.Models
                     .HasColumnName("MADDE_AD");
             });
 
+            modelBuilder.Entity<TblSatis>(entity =>
+            {
+                entity.ToTable("TBL_SATIS");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CariId).HasColumnName("CARI_ID");
+
+                entity.Property(e => e.Maliyet)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("MALIYET");
+                entity.Property(e => e.Fiyat)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("FIYAT");
+                entity.Property(e => e.Miktar).HasColumnName("MİKTAR");
+
+                entity.Property(e => e.Tarih)
+                    .HasColumnType("datetime")
+                    .HasColumnName("TARIH");
+
+                entity.Property(e => e.UrunId).HasColumnName("URUN_ID");
+            });
+
             modelBuilder.Entity<TblUrun>(entity =>
             {
                 entity.ToTable("TBL_URUN");
@@ -111,7 +135,6 @@ namespace Recetematik.Models
                 entity.Property(e => e.Urunadi)
                     .HasMaxLength(500)
                     .HasColumnName("URUNADI");
-                
             });
 
             modelBuilder.Entity<TblUrunbilgi>(entity =>

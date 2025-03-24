@@ -12,7 +12,7 @@ namespace Recetematik.Controllers
         {
             _c = c;
         }
-
+        #region urun
         public IActionResult Index()
         {
             var urunlerTemp = _c.TblUruns.ToList();
@@ -77,7 +77,8 @@ namespace Recetematik.Controllers
 
             _c.SaveChanges();
             return RedirectToAction("Index"); }
-
+        #endregion
+        #region hammadde
         public IActionResult Hammadde()
         {
             ViewBag.Birim = _c.TblBirims.ToList();
@@ -110,15 +111,19 @@ namespace Recetematik.Controllers
             _c.SaveChanges();
             return RedirectToAction("Hammadde");
         }
-
+#endregion
+        #region birim
+        public JsonResult BirimListele()
+        {
+            var birim = _c.TblBirims.ToList();
+            return Json(birim);
+        }
         public IActionResult UrunBirim()
         {
-
-            ViewBag.Birim = _c.TblBirims.ToList();
             return View();
         }
         [HttpPost]
-        public IActionResult BirimForm(TblBirim model)
+        public void BirimForm(TblBirim model)
         {
             if (model.Id > 0)
             {
@@ -130,15 +135,17 @@ namespace Recetematik.Controllers
             }
 
             _c.SaveChanges();
-            return RedirectToAction("UrunBirim");
+
         }
-        public IActionResult BirimSil(int id)
+        public void BirimSil(int id)
         {
             _c.TblBirims.Remove(_c.TblBirims.Find(id));
             _c.SaveChanges();
 
-            return RedirectToAction("UrunBirim");
         }
+        #endregion
+
+        #region sil
         public IActionResult UrunSil(int id)
         {
             _c.TblUruns.Remove(_c.TblUruns.Find(id));
@@ -155,11 +162,15 @@ namespace Recetematik.Controllers
         }
         public IActionResult UrunBilgiSil(int id)
         {
-            _c.TblUrunbilgis.Remove(_c.TblUrunbilgis.Find(id));
+            var urunbilgi = _c.TblUrunbilgis.Find(id);
+          var urunId=  _c.TblUruns.FirstOrDefault(x => x.Id == urunbilgi.UrunId)?.Id;
+            _c.TblUrunbilgis.Remove(urunbilgi);
             _c.SaveChanges();
            
-            return RedirectToAction("UrunBilgi");
+            return Redirect("/Urun/UrunBilgi/"+urunId);
         }
+        #endregion
+        #region UrunBilgi
         [HttpPost]
         public IActionResult UrunBilgiForm(TblUrunbilgi model)
         {
@@ -175,47 +186,21 @@ namespace Recetematik.Controllers
             _c.SaveChanges();
             var hammadde= _c.TblHammaddes.FirstOrDefault(m=> m.Id == model.HammaddeId);
             hammadde.Adet = hammadde.Adet - model.Miktar;
-            return RedirectToAction("UrunBilgi");
+            return RedirectToAction("UrunBilgi", new { id = model.UrunId});
         }
-
-
-
-
 
         public IActionResult UrunBilgi(int id)
         {
             ViewBag.UrunList = _c.TblUruns.ToList();   
             var hammadde = _c.TblHammaddes.ToList();
             var urun = _c.TblUrunbilgis.Where(m => m.UrunId == id).ToList();
-            var madde = hammadde.Where(m => urun.Select(x => x.HammaddeId).Contains(m.Id));
-            var urunmadde = urun.Where(m => hammadde.Select(x => x.Id).Contains(m.HammaddeId ?? 0));
-
-            var n = madde.FirstOrDefault(m => urun.Select(x => x.HammaddeId).Contains(m.Id));
-            var urunbilgi= urunmadde.FirstOrDefault(x=> x.HammaddeId == n.Id);
-            var UretilebilirAdet = n.Adet / urunbilgi.Miktar;
-           
-            foreach (var x in urunmadde)
-            {
-                var urunsayi = 0;
-                var y = madde.FirstOrDefault(m => m.Id == x.HammaddeId);
-                var temp = y.Adet / x.Miktar;
-
-                if (temp < UretilebilirAdet)
-                {
-                    UretilebilirAdet = temp;
-                }
-            
-            }
-            ViewBag.adet = UretilebilirAdet;
-            TempData["Sayi"] = UretilebilirAdet;
-
             ViewBag.Hammadde = hammadde;
             ViewBag.Urun = urun;
             ViewBag.Birim = _c.TblBirims.ToList();
-
+            ViewBag.Id= id; 
 
             return View();
         }
-
+        #endregion
     }
 }
